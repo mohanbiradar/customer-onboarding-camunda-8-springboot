@@ -31,8 +31,6 @@ The process solution is a Maven project and contains:
 
 # How To Run
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=QUB0dSBBMPM" target="_blank"><img src="http://img.youtube.com/vi/QUB0dSBBMPM/0.jpg" alt="Walkthrough" width="240" height="180" border="10" /></a>
-
 ## Create Camunda Platform 8 Cluster
 
 The easiest way to try out Camunda is to create a cluster in the SaaS environment:
@@ -59,13 +57,3 @@ You can easily use the application by requesting a new customer onboarding posti
 You can now see the process instance in Camunda Operate - linked via the Cloud Console.
 
 You can work on the user task using Camunda Tasklist, also linked via the Cloud Console.
-
-
-
-# Extended Process
-
-There is also an extended process model that adds some more tasks in the process: 
-
-![Customer Onboarding](docs/customer-onboarding-extended.png)
-
-You can find that in another repository on GitHub: https://github.com/berndruecker/customer-onboarding-camundacloud-springboot-extended

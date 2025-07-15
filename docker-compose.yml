@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  zeebe:
+    image: camunda/zeebe:8.4.1
+    container_name: zeebe
+    environment:
+      - ZEEBE_BROKER_NETWORK_ADVERTISEDHOST=zeebe
+    ports:
+      - "26500:26500"   # Zeebe Gateway gRPC
+      - "9600:9600"     # Zeebe Monitoring
+
+  operate:
+    image: camunda/operate:8.4.1
+    container_name: operate
+    environment:
+      - CAMUNDA_OPERATE_ZEEBE_GATEWAYADDRESS=zeebe:26500
+      - CAMUNDA_OPERATE_ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "8081:8080"
+    depends_on:
+      - zeebe
+      - elasticsearch
+
+  tasklist:
+    image: camunda/tasklist:8.4.1
+    container_name: tasklist
+    environment:
+      - CAMUNDA_TASKLIST_ZEEBE_GATEWAYADDRESS=zeebe:26500
+      - CAMUNDA_TASKLIST_ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "8082:8080"
+    depends_on:
+      - zeebe
+      - elasticsearch
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+volumes:
+  esdata: 

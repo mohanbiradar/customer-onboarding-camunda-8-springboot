@@ -1,0 +1,17 @@
+spring:
+  zeebe:
+    client:
+      broker:
+        gateway-address: 127.0.0.1:26500
+      security:
+        plaintext: true
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    root: INFO
+    io.camunda.zeebe: DEBUG
+
+server:
+  port: 8080 
